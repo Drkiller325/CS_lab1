@@ -13,25 +13,19 @@ def add_key_1(key_1,alphabet):
     for letter in word:
         for key in alphabet:
             if letter == alphabet[key]:
-                code_word.append((key + int(key_1)) % 26 + 1)
+                code_word.append((key + int(key_1)) % 26)
 
-    encripted_word = ''
-    for key in code_word:
-        encripted_word = encripted_word + alphabet[key]
-    return encripted_word
+    return code_word
 
 def remove_key_1(key_1,alphabet):
     code_word = []
     for letter in word:
         for key in alphabet:
             if letter == alphabet[key]:
-                code_word.append((key - int(key_1)) % 26 - 1)
+                code_word.append((key - int(key_1)) % 26)
                 break
 
-    encripted_word = ''
-    for key in code_word:
-        encripted_word = encripted_word + alphabet[key]
-    return encripted_word
+    return code_word
 
 def add_key_2(key_2):
     alphabet = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 6: 'F', 7: 'G', 8: 'H', 9: 'I', 10: 'J', 11: 'K', 12: 'L'
@@ -97,7 +91,11 @@ def input_key_2():
             print(e)
     return key_2
 
-
+def generate_word(decripted_word,alphabet):
+    word = ''
+    for key in decripted_word:
+        word = word + alphabet[key]
+    return word
 
 
 
@@ -106,7 +104,7 @@ def input_key_2():
 
 
 choice = '4'
-while(int(choice) != 3):
+while(True):
     alphabet = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 6: 'F', 7: 'G', 8: 'H', 9: 'I', 10: 'J', 11: 'K', 12: 'L'
         , 13: 'M', 14: 'N', 15: 'O', 16: "P", 17: 'Q', 18: 'R', 19: 'S', 20: 'T', 21: 'U', 22: 'V', 23: 'W'
         , 24: 'X', 25: 'Y', 26: 'Z'}
@@ -121,7 +119,10 @@ while(int(choice) != 3):
 
         alphabet = add_key_2(key_2)
         decripted_word = remove_key_1(key_1,alphabet)
-        print(decripted_word)
+        word = generate_word(decripted_word,alphabet)
+        print(word)
+        print(alphabet.values())
+
 
     elif int(choice) == 2:
         word = input_word()
@@ -130,10 +131,14 @@ while(int(choice) != 3):
 
         alphabet = add_key_2(key_2)
         encripted_word = add_key_1(key_1,alphabet)
+        word = generate_word(encripted_word,alphabet)
+        print(word)
         print(encripted_word)
-
+        print(alphabet.values())
     elif int(choice) == 3:
         break
+
+
 
     else:
         print("the input must be a number between 1 and 3 !!")
